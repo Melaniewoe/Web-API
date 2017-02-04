@@ -1,3 +1,9 @@
 Assignment 1
+
 https://www.googleapis.com/books/v1/volumes?q={{book_title}} 
+This will get a JSON response of books where the environment variable "book_title" is set to Turing. The result than can be 
+parsed and the variable can stored in a postman variable. With this environment variable, we can get the response depending
+on what the key value is declared.
+
 https://www.googleapis.com/books/v1/volumes/{{id}} 
+this http header takes the variable from the first http header, id, and shows the response with that id number. 

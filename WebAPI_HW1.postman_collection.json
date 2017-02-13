@@ -1,66 +1,52 @@
 {
-	"variables": [],
-	"info": {
-		"name": "WebAPI_HW1",
-		"_postman_id": "81de09cc-73a4-0866-c058-a49396ae4b55",
-		"description": "",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
-	},
-	"item": [
+	"id": "81de09cc-73a4-0866-c058-a49396ae4b55",
+	"name": "WebAPI_HW1",
+	"description": "",
+	"order": [
+		"9018000c-1bf1-24e6-c8ea-3d9b0627040b",
+		"3790b627-dd33-1fd1-23cc-0abd2f596bf1"
+	],
+	"folders": [],
+	"timestamp": 1486229785100,
+	"owner": "1491593",
+	"public": false,
+	"requests": [
 		{
-			"name": "https://www.googleapis.com/books/v1/volumes?q={{book_title}} ",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"postman.setEnvironmentVariable(\"book_title\", \"Turing\");",
-							"",
-							"tests[\"Status code is 200\"] = responseCode.code === 200;",
-							"",
-							"tests[\"Body matches string\"] = responseBody.has(\"Turing\");",
-							"",
-							"var jsonData = JSON.parse(responseBody);",
-							"postman.setEnvironmentVariable(\"id\", jsonData.items[0].id);"
-						]
-					}
-				}
-			],
-			"request": {
-				"url": "https://www.googleapis.com/books/v1/volumes?q={{book_title}} ",
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"description": ""
-			},
-			"response": []
+			"id": "3790b627-dd33-1fd1-23cc-0abd2f596bf1",
+			"headers": "",
+			"url": "https://www.googleapis.com/books/v1/volumes/{{id}}",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\nvar jsonData = JSON.parse(responseBody);\ntests[\"id matches string\"] = responseBody.has(\"HyMcH_9eTtoC\");",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1487008749697,
+			"name": "id",
+			"description": "",
+			"collectionId": "81de09cc-73a4-0866-c058-a49396ae4b55",
+			"responses": []
 		},
 		{
-			"name": "https://www.googleapis.com/books/v1/volumes/{{id}} ",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"tests[\"Status code is 200\"] = responseCode.code === 200;",
-							"",
-							"",
-							"",
-							"tests[\"Body matches string\"] = responseBody.has(\"id\");"
-						]
-					}
-				}
-			],
-			"request": {
-				"url": "https://www.googleapis.com/books/v1/volumes/{{id}} ",
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"description": ""
-			},
-			"response": []
+			"id": "9018000c-1bf1-24e6-c8ea-3d9b0627040b",
+			"headers": "id: {{id}}\n",
+			"url": "https://www.googleapis.com/books/v1/volumes?q={{book_title}} ",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "postman.setEnvironmentVariable(\"book_title\", \"Turing\");\ntests[\"Status code is 200\"] = responseCode.code === 200;\ntests[\"Body matches string\"] = responseBody.has(\"Turing\");\nvar jsonData = JSON.parse(responseBody);\npostman.setEnvironmentVariable(\"id\", jsonData.items[0].id);",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1487006430626,
+			"name": "book title",
+			"description": "",
+			"collectionId": "81de09cc-73a4-0866-c058-a49396ae4b55",
+			"responses": []
 		}
 	]
 }

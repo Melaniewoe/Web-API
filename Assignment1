@@ -7,3 +7,49 @@ on what the key value is declared.
 
 https://www.googleapis.com/books/v1/volumes/{{id}} 
 this http header takes the variable from the first http header, id, and shows the response with that id number. 
+
+Headers
+
+Alt-Svc →quic=":443"; ma=2592000; v="35,34"
+tells about an alternative “route’ to the same content for the same origin server that where the response is from.
+
+Cache-Control →private, max-age=0, must-revalidate, no-transform
+Cache-control specify directives for caching mechanisms in both, requests and responses. 
+Private -> is for a single user and must not be cached by a shared cache
+Max-age -> the maximum time in seconds that the fetched response is allowed to be reused from the time of the request
+Must-revalidate -> if the response is stale, caches must first revalidate it with the origin server
+No-transform -> cache must not changed
+
+Content-Length →34103
+It indicates the size of the entity-body
+
+Content-Type →application/json; charset=UTF-8
+designates the content to be in JSON format, encoded in the UTF-8 character encoding.
+
+Date →Sun, 05 Feb 2017 02:58:28 GMT
+Time and date the message was sent.
+
+ETag →"vFp1TYDMppbWxVi0Wgw_upD83cI/ctgebTu1fuGHbw8v20cGVPe7GuQ"
+identifier for a specific version of a resource.
+
+Expires →Sun, 05 Feb 2017 02:58:28 GMT
+Time and date where the message is stale
+
+Server →GSE
+Tells what server is used to handle the request.
+
+Vary →Origin
+Determines how to match future request headers to decide whether a cached response can be used rather than requesting a fresh one from the origin server.
+
+Vary →X-Origin
+Determines how to match future request headers to decide whether a cached response can be used rather than requesting a fresh one from the origin server
+
+X-Content-Type-Options →nosniff
+X-Content-Type-Options is marker to indicate the MIME types in the Content-Type headers should not be changed. The value nosniff will prevent Internet Explorer from MIME-sniffing a response away from the declared content-type.
+
+X-Frame-Options →SAMEORIGIN
+Instructs the browser to prevent any site with SAMEORIGIN in the response from being rendered within a frame.
+
+X-XSS-Protection →1; mode=block
+This lets domains toggle on and off the "XSS Filter" of IE8, which prevents some categories of XSS attacks.
+

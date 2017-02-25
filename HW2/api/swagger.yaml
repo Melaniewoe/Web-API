@@ -1,0 +1,189 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: Handbag App
+# during dev, should point to your local machine
+host: localhost:10010
+# basePath prefixes all resource paths 
+basePath: /
+# 
+schemes:
+  # tip: remove http to make production-grade
+  - http
+  - https
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+paths:
+  /handbag:
+    # our controller name
+    x-swagger-router-controller: handbag
+    get:
+      operationId: getAll
+      description: get the handbags list
+      # define the type of response for Success "200" and Error
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GetHandbagsListResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    
+  /handbag/{id}:
+    # our controller name
+    x-swagger-router-controller: handbag
+    get:
+      operationId : getOne
+      description: get a handbag
+      # define the type of response for Success "200" and Error
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GetHandbagResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    post:
+      operationId: save
+      description: save a new handbag to the list
+      # handbag info to be stored
+      parameters:
+        - name: id
+          description: Handbag id
+          type: string
+          in: path
+          required: true
+        - name: brand
+          description: Handbag brand
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/Handbag"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    put:
+      operationId : update
+      description: update a handbag
+      # define the parameters
+      parameters:
+        - name: id
+          description: Handbag id
+          type: string
+          in: path
+          required: true
+        - name: brand
+          description: Handbag brand
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/Handbag"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    delete:
+      operationId : delHandbag
+      description: delete a handbag
+      # define the parameters
+      parameters:
+        - name: id
+          description: Handbag id
+          type: string
+          in: path
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /swagger:
+    x-swagger-pipe: swagger_raw
+# complex objects have schema definitions
+definitions:
+  GetHandbagsListResponse:
+    required:
+      - handbags
+    properties:
+      # The array of handbags
+      handbags:
+        type: array
+        items: 
+          type: object
+          properties:
+            id:
+              type: string
+            brand:
+              type: string
+            year:
+              type: number
+  ErrorResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+  GetHandbagResponse:
+    required:
+      - id
+      - brand
+      - year
+    properties:
+      id:
+        type: string
+      brand: 
+        type: string
+      year:
+        type: number
+  Handbag:
+    type: object
+    properties:
+      brand:
+        type: string
+        description: handbag name of the brand
+      year:
+        type: number
+        description: handbag year
+    required:
+      - brand
+      - year
+  GeneralResponse:
+    type: object
+    properties:
+      success:
+        type: number
+        description: returns 1 if successful
+      description:
+        type: string
+        description: a short comment 
+    required:
+      - success
+      - description

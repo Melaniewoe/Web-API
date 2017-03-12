@@ -25,7 +25,7 @@ function testGithub(req, res) {
     version: "3.0.0"
   });
 
-  var token = "8f7f198df7c99b7f9984c1e46488a2d74ba34489";
+  var token = "this is where I put the token";
 
   github.authenticate({
     type:"oauth",

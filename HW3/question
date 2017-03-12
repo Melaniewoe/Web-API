@@ -1,5 +1,5 @@
 – Give one reason (there are many) OAuth tokens should not be granted in the main flow,
 assuming the user has sent in the correct credentials.
 
-The reason of this is because that other people(hacker) can get the information (access_token) of the user, in which they can 
-can attack.
+The reason of this is for security purposes, because other people(hacker) can get the information (access_token) of the user,
+in which they can can attack/stole the token easier (not safe).

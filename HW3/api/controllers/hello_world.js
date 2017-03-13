@@ -25,12 +25,19 @@ function testGithub(req, res) {
     version: "3.0.0"
   });
 
-  var token = "this is where I put the token";
+  //var token = "this is where I put the token";
 
-  github.authenticate({
-    type:"oauth",
-    token : token
-  });
+  var vault = require('avault').createVault(__dirname);
+
+    vault.get('sigad', function (profilestring){
+      var profile = JSON.parse(profilestring);
+      console.log(profile);
+        gits.authenticate({
+            type: "oauth",
+            token: token.token
+        });
+    });
+  
 
   var output = ""
 

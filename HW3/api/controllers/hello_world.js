@@ -29,7 +29,7 @@ function testGithub(req, res) {
 
   var vault = require('avault').createVault(__dirname);
 
-    vault.get('sigad', function (profilestring){
+    vault.get('vault1', function (profilestring){
       var profile = JSON.parse(profilestring);
       console.log(profile);
         gits.authenticate({

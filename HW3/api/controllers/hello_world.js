@@ -58,7 +58,7 @@ function testGithub(req, res) {
 
 // function createVault(){
 //   var vault = require('avault').createVault(__dirname);
-//   var key ="key1";
+//   var key ="key1"; 
 //   vault.generateKey(keyName).then(
 //     function(keyResponse){
 //       vault.store(key,{"username": "github", "password": "123"},

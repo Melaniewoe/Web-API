@@ -135,7 +135,7 @@
 					],
 					"cookie": [],
 					"responseTime": 64,
-					"body": "{\"401 Error\" : \"Access Denied\",\n        \"Invalid Access Token\"}"
+					"body": "{\"401 Error\" : \"Access Denied\", \"Error\" :\"Invalid Access Token\"}"
 				}
 			]
 		},

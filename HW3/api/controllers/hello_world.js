@@ -33,7 +33,7 @@ function testGithub(req, res) {
       console.log(profile);
         gits.authenticate({
             type: "oauth",
-            token: "617e65c2dc4dc150dde2aff8108183efb0735525"
+            token: token
         });
     });
   

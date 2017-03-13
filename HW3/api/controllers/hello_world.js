@@ -55,21 +55,7 @@ function testGithub(req, res) {
   return output;
 }  
 
-var vault = require('avault').createVault(__dirname);
-var keyName = 'key1';
-vault.generateKey(keyName).then(
-    function (keyResponse) {
-        vault.store(keyName, '{"username": "mrogers", "password": "director", "host": "nsa.rds.amazonaws.com", "database": "prism"}', 'sigad').then(
-            function (storeResponse) {
-                console.log('Ok', storeResponse);
-            },
-            function (err) {
-                console.log('Error', err);
-            });
-    },
-    function (err) {
-        console.log('Error', err);
-    });
+
 // function createVault(){
 //   var vault = require('avault').createVault(__dirname);
 //   var key ="key1"; 

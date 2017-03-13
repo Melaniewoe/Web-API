@@ -50,7 +50,7 @@ paths:
         # used as the method name of the controller
         operationId: getGit
         parameters:
-        - name: name
+        - name: name 
           in: query
           description: The name of the Github User
           required: false

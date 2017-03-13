@@ -49,6 +49,12 @@ paths:
         description: return user 
         # used as the method name of the controller
         operationId: getGit
+        parameters:
+        - name: name
+          in: query
+          description: The name of the Github User
+          required: false
+          type: string
         responses:
           "200":
             description: Success

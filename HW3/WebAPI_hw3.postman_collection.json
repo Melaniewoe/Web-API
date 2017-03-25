@@ -1,0 +1,90 @@
+{
+	"variables": [],
+	"info": {
+		"name": "WebAPI_hw3",
+		"_postman_id": "c4e19b85-d6a8-6a30-dd46-a5a91f90fdfb",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://melaniewoe-test.apigee.net/oauth/client_credential/accesstoken?grant_type=client_credentials",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"access_token\", jsonData.access_token);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "https://melaniewoe-test.apigee.net/oauth/client_credential/accesstoken?grant_type=client_credentials",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					},
+					{
+						"key": "Bearer",
+						"value": "nZRJ86DHzEUQOagZoDAepucfueU9",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "gpGNRlAtmrJhXqf7PB7POg8t6SfW9ZO7",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "client_secret",
+							"value": "5HuDeFtHXCALkxdR",
+							"type": "text",
+							"enabled": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://melaniewoe-test.apigee.net/hw3/gitinfo",
+			"request": {
+				"url": "http://melaniewoe-test.apigee.net/hw3/gitinfo",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "failed token, invalid"
+			},
+			"response": []
+		},
+		{
+			"name": "http://melaniewoe-test.apigee.net/hw3/gitinfo",
+			"request": {
+				"url": "http://melaniewoe-test.apigee.net/hw3/gitinfo",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": "request accepted"
+			},
+			"response": []
+		}
+	]
+}

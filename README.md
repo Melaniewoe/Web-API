@@ -1,1 +1,1 @@
-# Web-API
+# Skeleton project for Swagger

@@ -1,1 +1,1 @@
-# Skeleton project for Swagger
+Place your controllers in this directory.

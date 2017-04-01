@@ -1,1 +1,1 @@
-Place your controllers in this directory.
+Place helper files in this directory.

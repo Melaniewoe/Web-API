@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   version: "0.0.1"
-  title: Hello World App
+  title: Movie APP
 # during dev, should point to your local machine
 host: localhost:10010
 # basePath prefixes all resource paths 
@@ -23,7 +23,7 @@ paths:
     x-swagger-router-controller: movie
     get:
       operationId: getAll
-      description: get the movies list
+      description: get all list of all movies.
       # define the type of response for Success "200" and Error
       responses:
         "200":
@@ -49,12 +49,12 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: "#/definitions/GeneralResponse"
+            $ref: "#/definitions/AddNewMovieResponse"
         default:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-  /movie/{name}:
+  /movie/{title}:
     # our controller name
     x-swagger-router-controller: movie
     get:
@@ -62,7 +62,7 @@ paths:
       description: get a movie
       # define the type of response for Success "200" and Error
       parameters:
-        - name: name
+        - name: title
           type: string
           in: path
           required: true
@@ -80,22 +80,22 @@ paths:
       description: update a movie
       # define the parameters
       parameters:
-        - name: name
+        - name: title
           description: Movie title
           type: string
           in: path
           required: true
-        - name: name
+        - name: year
           description: Movie properties
           in: body
           required: true
           schema:
-            $ref: "#/definitions/Movie"
+            $ref: "#/definitions/AddNewMovieResponse"
       responses:
         "200":
           description: Success
           schema:
-            $ref: "#/definitions/GeneralResponse"
+            $ref: "#/definitions/AddNewMovieResponse"
         default:
           description: Error
           schema:
@@ -105,7 +105,7 @@ paths:
       description: delete a movie
       # define the parameters
       parameters:
-        - name: name
+        - name: title
           description: Movie title
           type: string
           in: path
@@ -114,7 +114,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: "#/definitions/GeneralResponse"
+            $ref: "#/definitions/AddNewMovieResponse"
         default:
           description: Error
           schema:
@@ -133,16 +133,28 @@ definitions:
         items: 
           type: object
           properties:
-            name:
-              type: string
+            year:
+              type: number
             actor:
               type: array
               items:
                 type: string
                 maximum: 3
                 minimum: 3
-            year:
-              type: number
+  AddNewMovieResponse:
+    required:
+      - year
+      - actor
+    properties:
+      year:
+        type: number
+      actor:
+        type: array
+        items:
+          type: string
+          maximum: 3
+          minimum: 3
+      
   ErrorResponse:
     required:
       - message
@@ -167,22 +179,20 @@ definitions:
     properties:
       title:
         type: string
-        description: task object name
       year:
         type: number
         description: task description
+      actor:
+        type: array
+        description: minimum three actors
+        maximum: 3
+        minimum: 3
+        items:
+          type: string
+          maximum: 3
+          minimum: 3
     required:
       - title
       - year
-  GeneralResponse:
-    type: object
-    properties:
-      success:
-        type: number
-        description: returns 1 if successful
-      description:
-        type: string
-        description: a short comment 
-    required:
-      - success
-      - description
+      - actor
+ 

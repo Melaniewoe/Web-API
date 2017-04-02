@@ -1,0 +1,166 @@
+{
+	"variables": [],
+	"info": {
+		"name": "WebAPI_hw4",
+		"_postman_id": "ea53fb85-3c25-a374-1b4a-3adc8e73a607",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://melaniewoe-test.apigee.net/hw4/movie",
+			"request": {
+				"url": "http://melaniewoe-test.apigee.net/hw4/movie",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Get all the movies"
+			},
+			"response": []
+		},
+		{
+			"name": "http://melaniewoe-test.apigee.net/hw4/movie",
+			"request": {
+				"url": "http://melaniewoe-test.apigee.net/hw4/movie",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Unbroken\",\n\t\"year\": 2014,\n\t\"actor\":\n\t[\"Jack O'Connell\", \n\t\"Miyavi\", \n\t\"Domhnall Gleeson\"]\n}"
+				},
+				"description": "New Movie added"
+			},
+			"response": []
+		},
+		{
+			"name": "http://melaniewoe-test.apigee.net/hw4/movie",
+			"request": {
+				"url": "http://melaniewoe-test.apigee.net/hw4/movie",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Unbroken\",\n\t\"actor\":\n\t[\"Jack O'Connell\", \n\t\"Miyavi\",\n\t\"Domhnall Gleeson\"]\n}"
+				},
+				"description": "Movie cannot be added, does not have year"
+			},
+			"response": []
+		},
+		{
+			"name": "http://melaniewoe-test.apigee.net/hw4/movie",
+			"request": {
+				"url": "http://melaniewoe-test.apigee.net/hw4/movie",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Unbroken\",\n\t\"year\": 2014,\n\t\"actor\":\n\t[\"Jack O'Connell\", \n\t\"Miyavi\"]\n}"
+				},
+				"description": "Movie cannot be added, must have at least 3 actors"
+			},
+			"response": []
+		},
+		{
+			"name": "http://melaniewoe-test.apigee.net/hw4/movie/Inception",
+			"request": {
+				"url": "http://melaniewoe-test.apigee.net/hw4/movie/Inception",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Request a single movie"
+			},
+			"response": []
+		},
+		{
+			"name": "http://melaniewoe-test.apigee.net/hw4/movie/Inception",
+			"request": {
+				"url": "http://melaniewoe-test.apigee.net/hw4/movie/test",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Request a single movie that is not found"
+			},
+			"response": []
+		},
+		{
+			"name": "http://melaniewoe-test.apigee.net/hw4/movie/Inception",
+			"request": {
+				"url": "http://melaniewoe-test.apigee.net/hw4/movie/La La Land",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"year\": 2019,\n\t\"actor\":\n\t[\"h1\",\n\t\"h2\",\n\t\"h3\"]\n}"
+				},
+				"description": "Update a movie"
+			},
+			"response": []
+		},
+		{
+			"name": "http://melaniewoe-test.apigee.net/hw4/movie/Inception",
+			"request": {
+				"url": "http://melaniewoe-test.apigee.net/hw4/movie/what movie",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"year\": 2019,\n\t\"actor\":\n\t[\"h1\",\n\t\"h2\",\n\t\"h3\"]\n}"
+				},
+				"description": "Update a movie that is not found, failed"
+			},
+			"response": []
+		},
+		{
+			"name": "http://melaniewoe-test.apigee.net/hw4/movie/Inception",
+			"request": {
+				"url": "http://melaniewoe-test.apigee.net/hw4/movie/Inception",
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": "Delete a movie"
+			},
+			"response": []
+		},
+		{
+			"name": "http://melaniewoe-test.apigee.net/hw4/movie/Inception",
+			"request": {
+				"url": "http://melaniewoe-test.apigee.net/hw4/movie/test movie",
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": "Delete a movie that is not found, failed"
+			},
+			"response": []
+		}
+	]
+}

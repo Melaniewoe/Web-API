@@ -66,6 +66,11 @@ paths:
           type: string
           in: path
           required: true
+        - name: reviews
+          required: false
+          in: query
+          type: boolean
+          default: false
       responses:
         "200":
           description: Success
@@ -119,6 +124,48 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+    post:
+      description: add review
+      operationId: addReview
+      parameters:
+        - name: title
+          required: true
+          in: path
+          type: string
+        - name: review
+          required: true
+          in: body
+          description: A review to add to the database
+          schema:
+            $ref: "#/definitions/Review"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/AddNewMovieResponse"
+        default:
+          description: error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /reviews/{id}:
+    x-swagger-router-controller: movies
+    delete:
+      description: Delete a movie from the database.
+      operationId: deleteReview
+      parameters:
+        - name: id
+          required: true
+          in: path
+          type: string
+      responses:
+        "200":
+          description: Removes a review.
+          schema:
+            $ref: "#/definitions/ReviewResponse"
+        default:
+          description: error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
@@ -141,10 +188,6 @@ definitions:
                 type: string
                 maximum: 3
                 minimum: 3
-            review: 
-              type: array
-                reviewer: 
-                  type: string
   AddNewMovieResponse:
     required:
       - year
@@ -178,6 +221,26 @@ definitions:
           type: string
           maximum: 3
           minimum: 3
+  ReviewResponse:
+    properties:
+      Review:
+        type: array
+        items: 
+          type: object
+  Review:
+    required:
+      - review
+      - score
+      - reviewer
+    properties:
+      reviewer:
+        type: string
+      movie:
+        type: string
+      review:
+        type: string
+      score:
+        type: integer
   Movie:
     type: object
     properties:
@@ -195,15 +258,6 @@ definitions:
           type: string
           maximum: 3
           minimum: 3
-      review: 
-        type: object
-        properties: 
-          reviewer: 
-            type: string
-          comment: 
-            type: string
-          rate:
-            type: number
     required:
       - title
       - year

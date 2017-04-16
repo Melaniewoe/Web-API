@@ -1,1 +1,1 @@
-# Skeleton project for Swagger
+Place your controller tests in this directory.

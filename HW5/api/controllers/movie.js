@@ -6,10 +6,13 @@ module.exports = {
     save : save,
     getOne : getOne,
     update : update,
-    delMovie : delMovie
+    delMovie : delMovie,
+    addReview: addReview,
+    deleteReview: deleteReview
 };
 
 var usergrid = require('usergrid');
+var _ = require('lodash');
     
 // or you can load from a config file; see config.sample.json
     
@@ -34,6 +37,9 @@ var usergrid = new usergridClient({
 
 //GET /movie operationId
 function getAll(req, res, next) {
+
+    var bool = req.query.review;
+
     //res.json({ movies: db.find()});
     //get specific movie
     usergrid.GET('movies', function(error, usergridResponse, entities) {
@@ -42,18 +48,41 @@ function getAll(req, res, next) {
 })
 }
 
-function getOne (req, res, next){
-var title = req.swagger.params.title.value;
+function getOne (req, res){
 
-    usergrid.GET('movies', title, function(error, usergridResponse, entity) {
+var title = req.swagger.params.title.value;
+var review = req.swagger.params.review.value;
+  usergrid.GET('movies', title, function(error, usergridResponse, entity) {
     
-    if (usergridResponse.ok){
-      res.status(200).json(usergridResponse.entities);
-     }
+    if (usergridResponse.ok)
+    {
+        if (!review)
+        {
+            res.status(200).json(usergridResponse.entity);
+        }
+        else 
+        {
+            //use query to get the selected title
+            var query = "select * where movie contains ='"+ entity.name +"'" 
+            var options = {
+            type:"reviews",
+            qs:{ql: query }
+            }
+            usergrid.GET(options, function(error, usergridResponse2, entities) 
+            {
+                res.json({
+                    movie: usergridResponse,
+                    review: usergridResponse2.entities
+                }).end();
+            })
+            
+        }
+    }
     else{
       res.status(404).json("Movie title is not found");
     }
 })
+
 }
 
 
@@ -75,12 +104,6 @@ var movies = req.swagger.params.title.value;
         res.json( "Movie title is isUndefined!");
    else if (movies['actor'].length < 3)
         res.json("Must have at least 3 actors");
-   else if (movies['review'].length <1)
-        res.json("Must have at least 1 review");
-   //reviewer cannot be empty
-   //
-   //
-   //
    else if (movies['year'].length < 1)
         res.json("Year is isUndefined");
    
@@ -117,8 +140,7 @@ function update(req, res, next) {
         type: 'movies',
         name: title,
         year: year['year'],
-        actor: year['actor'],
-        review: year['review']
+        actor: year['actor']
         }
 
         usergrid.PUT(title, { keywords: title }, function(error, usergridResponse) {
@@ -154,3 +176,86 @@ function delMovie(req, res, next) {
     })
 
 }
+
+function addReview (req,res, next){
+    var title = req.swagger.params.title.value;
+    var review = req.swagger.params.review.value;
+    _.assign(review, {type: 'review'});
+    usergrid.GET("movies", title, function(error, usergridResponse, entities) {
+        if (!error)
+        {
+            var name = entities.name;
+            _.assign(review, {movie: name});
+            
+            if (review['movie'].length < 1)
+                res.json("movie is undefined");
+            else if(review['rate'].length < 1)
+                res.json("review rate is undefined");
+            else if(review['review'].length < 1)
+                res.json("review is undefined");
+            else usergrid.POST(review, function (err, response, review) 
+            {
+                    if (err) 
+                    {
+                        res.json({message: err});
+                    }
+                    else 
+                    {
+                        review.save(usergrid, function (err) 
+                        {
+
+                            if (err) 
+                            {
+                                res.status(500).json(err).end();
+                            }
+                            else res.json({
+                                message: 'Review added!',
+                                review: review
+                            }).end();
+                        });
+                    }
+                })
+                
+        }
+
+        else
+            res.json("Movie does not exist! review cannot be added.");
+    });
+    /*
+
+   if (movies['title'].length < 1)
+        res.json( "Movie title is isUndefined!");
+   else if (movies['actor'].length < 3)
+        res.json("Must have at least 3 actors");
+   else if (movies['year'].length < 1)
+        res.json("Year is isUndefined");
+   
+    //res.json({success: db.save(req.body), description: "Movie added to the list!"});
+    else
+    {
+        usergrid.POST(entity, function(error, usergridResponse, entity) {
+    // entity should now have a uuid property and be created
+        
+            res.json("Movie added!");
+      
+        })
+    }
+    */
+
+}
+
+function deleteReview(req,res, next){
+
+    var uuid = req.swagger.params.title.value;
+    Usergrid.DELETE('reviews',uuid, function(error, usergridResponse) {
+        if (error) 
+        {
+            res.json({error: error});
+        }
+        else
+        {
+            res.status(200).json("Review deleted!");
+        }
+    })
+}
+

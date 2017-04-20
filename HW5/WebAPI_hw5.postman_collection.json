@@ -1,0 +1,64 @@
+{
+	"variables": [],
+	"info": {
+		"name": "WebAPI_hw5",
+		"_postman_id": "de6a7be2-057e-5ff3-c931-e0ec63d4060b",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://melaniewoe-test.apigee.net/hw5/movie/la la land?review=true",
+			"request": {
+				"url": "http://melaniewoe-test.apigee.net/hw5/movie/la la land?review=true",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Review = true, display the review"
+			},
+			"response": []
+		},
+		{
+			"name": "http://melaniewoe-test.apigee.net/hw5/movie/la la land?review=false",
+			"request": {
+				"url": "http://melaniewoe-test.apigee.net/hw5/movie/la la land?review=false",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "review = false, does not dislay review"
+			},
+			"response": []
+		},
+		{
+			"name": "http://melaniewoe-test.apigee.net/hw5/movie/la la land?review=false",
+			"request": {
+				"url": "http://melaniewoe-test.apigee.net/hw5/movie/la la land",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "no review"
+			},
+			"response": []
+		},
+		{
+			"name": "http://melaniewoe-test.apigee.net/hw5/movie/la la land?review=false",
+			"request": {
+				"url": "http://melaniewoe-test.apigee.net/hw5/movie/Unbroken",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"reviewer\": \"kim kim\",\n  \"review\": \"so good\",\n  \"rate\": 5\n}"
+				},
+				"description": "add review"
+			},
+			"response": []
+		}
+	]
+}
